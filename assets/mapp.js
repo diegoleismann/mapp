@@ -188,29 +188,9 @@ function formatDate(format){
 }
 
 
-
-
-function ListDataAction(){
-  var elements = [];
-  var elementsByTag = [];
-  for(t in html5_content){
-    var tag = html5_content[t];
-
-    var list_data_action = tags(tag,{'attr':'data-action'});
-    if(list_data_action.length > 0){
-      for(l in list_data_action){
-        elements.push(list_data_action[l]);
-      }
-    }
-  }
-  console.log('ELEMENTS');
-  console.log(elements);
-  return elements;
-}
-
 function Mapp(obj){
   if(obj.actions){
-    var list_data_action = ListDataAction();
+    var list_data_action = get({'attr','data-action'})
     console.log(list_data_action);
     var Actions = obj.actions;
     for(i in Actions){

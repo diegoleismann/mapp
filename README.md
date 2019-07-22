@@ -6,9 +6,9 @@ O Mapp js é um framework javascript que busca trazer de uma forma simples de de
 
 ### Função get(query)
 
-Essa função ser para obter uma lista de elementos de acordo com uma pesquisa do objeto query
+Essa função serve para obter uma lista de elementos de acordo com uma pesquisa do objeto query
 
-### Objeto query
+#### Objeto query
 
 O objeto query serve para delimitar um grupo de elementos no HTML.
 
@@ -24,7 +24,7 @@ Propriedades:
  ```  
  __class:__ String - retorna array de elementos por classe (Atributo Class) definida na string. exemplo:  
  ```javascript
-get({'list':'btn'})
+get({'class':'btn'})
  ```
  retorna array com elementos HTML:
  ```javascript
