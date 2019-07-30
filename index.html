@@ -6,35 +6,60 @@
   <link rel="stylesheet" href="assets/site.css">
 </head>
 <body>
-  <div id="app">
+  <div data-dock="app">
     <header>
       <div id="header">
       <div class="c1">
-        <a href="#home">
-          <img class="logo" src="assets/images/logo.png" height="20">
+        <a data-link="home" class="logo-link" data-router="dock-view" href="#home">
+          Mapp JS Framework
+
         </a>
         <ul class="header-menu">
-          <li><a class="router-link" data-link="servicos" href="#servicos">Serviços</a></li>
-          <li><a class="router-link" data-link="projetos" href="#projetos">Projetos</a></li>
-          <li><a class="router-link" data-link="contato" href="#contato">Contato</a></li>
+          <li><a class="router-link" data-link="servicos" data-router="dock-view" href="#conheca">Conheça</a></li>
+          <li><a class="router-link" data-link="projetos" data-router="dock-view" href="#projetos">Documentação</a></li>
+          <li><a href="https://github.com/diegoleismann/mapp/issues">Ajuda</a></li>
         </ul>
+        <div class="fr dev-by">
+          Desenvolvido por <img class="logo" src="assets/images/logo.png" height="13">
+        </div>
       </div>
       </div>
     </header>
-    <div id="view-dock">
-      <div data-action="alert">hello world</div>
+    <div data-dock="view">
+      <div class="c1">
+        <div class="block">
+          <div data-dock="menu" id="dock-menu" class="c20">
 
-      <div data-action="alert1">teste1</div>
-      <div data-action="alert2">teste2</div>
-      <div data-action="alert3">teste3</div>
-      <div data-action="alert4">teste4</div>
-      <div data-action="alert">teste5 oi</div>
+            <div data-action="alert1">teste1</div>
+            <div data-action="alert2">teste2</div>
+            <div data-action="alert3">teste3</div>
+            <div data-action="alert4">teste4</div>
+            <div data-action="alert">teste5 oi</div>
+          </div>
+          <div data-dock="content" class="c80">
+
+          </div>
+
+        </div>
+      </div>
+
     </div>
     <footer>
 
     </footer>
   </div>
-</body>
+  <div data-template="menu">
+
+  </div>
+  <div data-template="home">
+    <div class="page">
+      <h1 data-prop="titulo"></h1>
+      <p data-prop="data_cadastro"></p>
+      <div data-action="alert">hello world</div>
+    </div>
+  </div>
+  <div data-template="posts_list"></div>
+  </body>
 
   <script type="text/javascript" src="assets/mapp.js"></script>
   <script type="text/javascript" src="assets/site.js"></script>

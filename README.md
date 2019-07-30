@@ -74,3 +74,21 @@ get({'class':'btn'})
 ### Tags HTML5 content
 
 Foi definida uma listagem de tags padrão caso não seja definido uma tag no objeto query. Segue abaixo a lista de Tags mais comuns do HTML5.
+```javascript
+  'a', 'abbr', 'address', 'area', 'article',
+  'aside', 'audio', 'b', 'blockquote', 'body', 'br',
+  'button', 'canvas', 'caption', 'cite', 'code',
+  'col', 'colgroup', 'data', 'datalist', 'dd',
+  'del', 'details', 'dialog', 'div', 'dl', 'dt',
+  'em', 'embed', 'fieldset', 'figcaption', 'figure',
+  'footer', 'form', 'h1','h2','h3', 'h4','h5','h6',
+  'header', 'hr', 'i', 'iframe', 'img', 'input',
+  'ins', 'kbd', 'label', 'legend', 'li', 'main',
+  'map', 'mark', 'nav', 'object', 'ol', 'optgroup',
+  'option', 'output', 'p', 'param', 'picture',
+  'pre', 'q', 's', 'samp', 'section', 'select',
+  'small', 'source', 'span', 'strong', 'sub',
+  'summary', 'sup', 'svg', 'table', 'tbody',
+  'td', 'template', 'textarea', 'tfoot', 'th', 'thead',
+  'time', 'tr', 'track', 'u', 'ul', 'var', 'video'
+```

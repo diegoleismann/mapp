@@ -80,7 +80,10 @@ function get(query){
 }
 
 
-//[task] Implementar junto ao set
+
+
+
+/*//[task] Implementar junto ao set
 function attr(element, attr_name, set){
   var elem = element.getAttribute(attr_name);
 
@@ -99,14 +102,113 @@ function attr(element, attr_name, set){
       return elem;
     }
   }
+}*/
+
+function attr(attr, template_name){
+  var listTemplates = get({'attr':attr});
+  var selected = [];
+  var l =0;
+  for(l in listTemplates){
+    var element = listTemplates[l];
+    var element_attr = element.getAttribute(attr);
+    if(element_attr==template_name){
+      selected.push(element);
+    }
+  }
+  return (selected[0]) ? selected[0] : null ;
 }
 
-function render(element, html){
-  if(html.tagName){
-    html = html.innerHTML;
+
+
+function actions(obj){
+  var list_data_action = get({'attr':'data-action'})
+  var Actions = obj;
+  for(i in Actions){
+    var action_name = i;
+    var action = Actions[i];
+    for(l in list_data_action){
+      var elem = list_data_action[l]
+      var data_action = elem.getAttribute('data-action');
+      if(data_action == action_name){
+        for(type in action){
+          var callback = action[type];
+          if(typeof callback == 'function'){
+
+            listen(type, elem, callback);
+          }else{
+            console.log(type+' não é um tipo de funcao')
+          }
+
+        }
+      }
+    }
+  }
+}
+
+function render(obj){
+  var render_data = {};
+  var render_dock = null;
+  var render_template = null;
+  if(!obj.dock){
+    console.error('Defina dock no render');
+    return false;
+  }else{
+    render_dock = attr('data-dock', obj.dock);
+  }
+  if(!obj.template){
+    console.error('Defina template no render');
+    return false;
+  }else{
+    render_template = attr('data-template',obj.template);
   }
 
-  if(element.length > 0){
+  if(obj.data){
+    render_data = obj.data
+  }else{
+    console.error('Data não foi definida');
+  }
+
+  if(!render_dock || !render_dock.tagName){
+    console.error('Dock não encontrado no HTML');
+    return false;
+  }
+
+  if(!render_template || !render_template.tagName){
+    console.error('Template não encontrado no HTML');
+    return false;
+  }
+
+  if(render_template && render_dock){
+    //loading
+    render_dock.innerHTML ='carregando...'
+    //set data
+    for(r in render_data){
+      var item = render_data[r];
+      var item_name = r;
+      var prop = attr('data-prop', item_name);
+      if(prop && prop.tagName){
+        prop.innerHTML = item;
+      }
+
+    }
+    //set template
+    var rendered_template = render_template.innerHTML;
+    //clear data
+    for(r in render_data){
+      var item = render_data[r];
+      var item_name = r;
+      var prop = attr('data-prop', item_name);
+      if(prop && prop.tagName){
+        prop.innerHTML = '';
+      }
+
+    }
+    //set dock
+    render_dock.innerHTML = rendered_template;
+    if(obj.actions){actions(obj.actions)}
+  }
+
+/*  if(element.length > 0){
     for(i=0; i<element.length; i++){
       item = element[i];
       item.innerHTML = html
@@ -114,7 +216,7 @@ function render(element, html){
   }
   if(element.tagName){
     element.innerHTML = html
-  }
+  }*/
 
 }
 var registerTimeout = []
@@ -168,6 +270,25 @@ function listen(type, element, callback){
 
 }
 
+function info(element,obj){
+  if(element.tagName){
+    if(obj.id){
+      return (element.id) ? element.id : null
+    }
+    if(obj.class){
+      var element_class = element.getAttribute('class');
+      return element_class.split(' ');
+    }
+    if(obj.attr){
+      var attr = element.getAttribute(obj.attr)
+      console.log(attr);
+      return attr ? attr : ''
+    }
+  }else{
+    console.error('Target não é um elemento válido')
+  }
+}
+
 function html(el){
   if(el.tagName){
     return el.innerHTML;
@@ -186,34 +307,18 @@ function formatDate(format){
   formated = formated.replace('YYYY', d.getFullYear(), formated);
   return formated
 }
-
+var VIEWS = []
+function createView(view_name,obj){
+  obj.view_name = view_name;
+  VIEWS[view_name] = obj;
+}
+function view(view_name){
+  return (VIEWS[view_name]) ? VIEWS[view_name] : {};
+}
 
 function Mapp(obj){
-  if(obj.actions){
-    var list_data_action = get({'attr','data-action'})
-    console.log(list_data_action);
-    var Actions = obj.actions;
-    for(i in Actions){
-      console.log(i);
-      var action_name = i;
-      var action = Actions[i];
-      for(l in list_data_action){
-        var elem = list_data_action[l]
-        var data_action = elem.getAttribute('data-action');
-        if(data_action == action_name){
-          for(type in action){
-            var callback = action[type];
-            if(typeof callback == 'function'){
-              console.log(type+' é um tipo de funcao')
-              listen(type, elem, callback);
-            }else{
-              console.log(type+' não é um tipo de funcao')
-            }
-
-          }
-        }
-      }
-    }
-  }
+  obj.render.actions = obj.actions;
+  if(obj.render){render(obj.render)}
+  //if(obj.actions){actions(obj.actions)}
 
 }

@@ -49,11 +49,41 @@ Dock.renderView('home');
 
 
 console.log(tags('a', {attr:'class'}))*/
-console.log('foi')
-var App = new Mapp({
+
+
+var Actions = {
+  "alert":{click:function(){
+    render(view('list'));
+  }}
+}
+
+createView('home', {
+  dock:'content',
+  template:'home',
+  data:{
+    titulo:'meu título',
+    data_cadastro:'24/10/2018'
+  },
+  actions:Actions
+})
+
+createView('list', {
+  dock:'content',
+  template:'home',
+  data:{
+    titulo:'list',
+    data_cadastro:'24/10/2018'
+  },
   actions:{
     "alert":{click:function(){
-      alert('foi')
+      render(view('home'));
+      console.log('home')
     }}
   }
 })
+
+
+
+
+render(view('home'))
+info(get({id:'dock-menu'}),{'attr':'class'})
