@@ -64,7 +64,18 @@ createView('home', {
     titulo:'meu título',
     data_cadastro:'24/10/2018'
   },
-  actions:Actions
+  actions:Actions,
+  states:{
+    'loading':function(view){
+      view.response('posts',function(view,posts){
+        view.data = posts;
+        view.state = 'posts';
+      })
+    },
+    'posts':function(view){
+
+    }
+  }
 })
 
 createView('list', {
